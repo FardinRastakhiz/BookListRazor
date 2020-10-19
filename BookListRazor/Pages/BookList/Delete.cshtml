@@ -1,0 +1,24 @@
+﻿@page "{id}"
+@model BookListRazor.Pages.BookList.DeleteModel
+@{
+    ViewData["title"] = "Delete";
+}
+
+<h1>Delete Confirmation</h1>
+
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count() > 0)
+{
+    <div class="alert alert-
+       <strong>Error!</strong> danger">
+        @ViewData.ModelState["Error"].Errors.First().ErrorMessage
+    </div>
+}
+
+<div class="alert alert-danger">
+    <h5>Are you sure you want to delete @Model.Book.Name</h5>
+    <form method="post">
+        <button type="submit" class="btn btn-danger">Yes</button>
+        <a class="btn btn-primary" asp-page="/BookList/Index">No</a>
+    </form>
+</div>
+

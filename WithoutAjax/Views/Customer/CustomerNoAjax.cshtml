@@ -1,0 +1,39 @@
+﻿@using WithoutAjax.Models
+@model Tuple<List<Customer>, Customer>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("OnSelectCustomer","Customer"))
+{
+    @Html.AntiForgeryToken();
+    var selected = false;
+
+    foreach (var customer in Model.Item1)
+    {
+        selected = Model.Item2== customer;
+
+        @Html.RadioButton("CustomerNumber", customer.Id, false);
+        @Html.Label( customer.Name);
+        <br/>
+    }
+    <input type="submit" id="SubmitButton" value="Display Details"/>
+}
+
+
+<div id="customerInfo">
+    @Html.Partial("~/Views/Shared/_CustomerDetails.cshtml", Model.Item2)
+</div>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Customer</title>
+</head>
+<body>
+    <div>
+    </div>
+</body>
+</html>
